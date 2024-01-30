@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Loader from "./Loader";
 import "./App.css";
 
 function App() {
@@ -78,6 +79,7 @@ function ForgotPassword() {
             Reset Password
           </button>
         </form>
+        {loading && <Loader />}
         {message && <p>{message}</p>}
       </div>
     </div>
@@ -88,9 +90,10 @@ function RegisterUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   async function handleSubmit(e) {
     e.preventDefault();
-
+    setLoading(true);
     let response;
     try {
       response = await axios.post(
@@ -116,6 +119,8 @@ function RegisterUser() {
 
       setEmail("");
       setPassword("");
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -153,6 +158,7 @@ function RegisterUser() {
           Sign Up Now
         </button>
       </form>
+      {loading && <Loader />}
       {message && <p className="infor">{message}</p>}
     </div>
   );
