@@ -21,10 +21,10 @@ function App() {
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
+  const [loading, setLoading] = useState(false);
   async function handleSubmit(e) {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://password-reset-backend-tjdy.onrender.com/api/forgot-password",
@@ -51,6 +51,8 @@ function ForgotPassword() {
         // setEmail("");
         setMessage("");
       }, 5000);
+    } finally {
+      setLoading(false);
     }
   }
 
