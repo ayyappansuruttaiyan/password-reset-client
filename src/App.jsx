@@ -27,7 +27,7 @@ function ForgotPassword() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/forgot-password",
+        "https://password-reset-backend-tjdy.onrender.com/api/forgot-password",
         {
           email,
         }
@@ -91,10 +91,13 @@ function RegisterUser() {
 
     let response;
     try {
-      response = await axios.post("http://localhost:5000/api/register", {
-        email,
-        password,
-      });
+      response = await axios.post(
+        "https://password-reset-backend-tjdy.onrender.com/api/register",
+        {
+          email,
+          password,
+        }
+      );
       if (response && response.data && response.data.message) {
         setMessage(response.data.message);
         setEmail("");
